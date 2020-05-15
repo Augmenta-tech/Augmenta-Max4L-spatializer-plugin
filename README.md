@@ -10,11 +10,12 @@ Then it can be used to trigger midi notes or map any parameters in Ableton Live 
 - OSC input
 - 10 persons concurrent tracking + 1 touchosc or external osc input (/posX /posY or /positionX /positionY)
 - Simulate one object with the mouse for testing
+- Mute option
 
 ### Areas
-- 8 areas for midi note trigger or parameter mapping
+- 8 areas for midi notes triggers or parameters mappings
 - area placement / random shake / size option
-- mouse selection and placement
+- mouse for selection and placement
 
 ### Output
 - midi note trig velocity and duration option
