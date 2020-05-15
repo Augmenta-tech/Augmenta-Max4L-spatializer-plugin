@@ -24,4 +24,4 @@ Then it can be used to trigger midi notes or map any parameters in Ableton Live 
 
 ## Credits
 
-Designed & developped by Rom1Constant & THEORIZ
+Designed & developped by [Romain Constant](www.romainconstant.com) & [THEORIZ](www.theoriz.com)
