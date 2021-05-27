@@ -6,6 +6,8 @@ Then it can be used to trigger midi notes or map any parameters in Ableton Live 
 
 ## Features
 
+You can drag'n drop several instance of the M4L plugin in your Ableton live session, and use a specific object position to create sound.
+
 ### Input
 - OSC input
 - 10 persons concurrent tracking + 1 touchosc or external osc input (/posX /posY or /positionX /positionY)
@@ -21,6 +23,14 @@ Then it can be used to trigger midi notes or map any parameters in Ableton Live 
 - midi note trig velocity and duration option
 - mapping values % min and max option
 - mute option
+
+## Processing visualizer
+
+If you want to project on the floor the areas and data, you can do it via Syphon/Spout
+
+The M4L sends coordinates through osc to port 9000
+
+The processing code here draws the disks and point to reproduce the interface from the M4L plugin.
 
 ## Credits
 
