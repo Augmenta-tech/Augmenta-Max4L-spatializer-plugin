@@ -6,6 +6,8 @@ Then it can be used to trigger midi notes or map any parameters in Ableton Live 
 
 vidéo : https://www.youtube.com/watch?v=HbIoZnGIr1g
 
+![maxforlive com](https://user-images.githubusercontent.com/5172593/120223115-5e8e9f00-c241-11eb-8550-13d5fa9590ac.gif)
+
 ## Features
 
 You can drag'n drop several instance of the M4L plugin in your Ableton live session, and use a specific object position to create sound.
