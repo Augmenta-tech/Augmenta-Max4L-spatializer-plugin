@@ -29,7 +29,7 @@ int manualSceneY = 480; // default
 float originX;
 float originY;
 
-AugmentaP5 auReceiver;
+Augmenta auReceiver;
 int oscPort = 12000;  // OSC default reception port
 boolean drawDebugData = false;
 
@@ -46,7 +46,7 @@ void settings() {
 void setupAugmenta() {
 
   // Create the Augmenta receiver
-  auReceiver= new AugmentaP5(this, oscPort);
+  auReceiver= new Augmenta(this, oscPort);
   auReceiver.setTimeOut(30); // TODO : comment needed here !
   auReceiver.setGraphicsTarget(canvas);
   // You can set the interactive area (can be set with the mouse in this example)

@@ -1,5 +1,5 @@
 
-import augmentaP5.*;
+import augmenta.*;
 import oscP5.*;
 
 // Visualize data from Augmenta single spatializer through a Syphon/Spout output
