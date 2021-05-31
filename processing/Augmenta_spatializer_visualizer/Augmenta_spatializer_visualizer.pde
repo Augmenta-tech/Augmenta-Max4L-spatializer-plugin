@@ -26,7 +26,9 @@ void setup() {
   background(0);
   // /!\ Keep this setup order !
   setupSyphonSpout();
-  myosc = new OscP5(this, 12001);
+
+  // The messages coming from Max4Live are sent on the port 9000 by default
+  myosc = new OscP5(this, 9000);
 
   //setupAugmenta();
   if (mode3D) {
