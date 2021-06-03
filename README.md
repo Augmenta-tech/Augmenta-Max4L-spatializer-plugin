@@ -28,6 +28,10 @@ You can drag'n drop several instance of the M4L plugin in your Ableton live sess
 - mapping values % min and max option
 - mute option
 
+## Use
+
+Download and drag'n drop the file as an effect in [Ableton Live](https://www.ableton.com/).
+
 ## Processing visualizer
 
 If you want to project on the floor the areas and data, you can do it via Syphon/Spout
