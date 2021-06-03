@@ -4,7 +4,7 @@ Augmenta OSC spatializer is a tool to produce music from movements of objects in
 It receives persons or objects position from different sources : [Augmenta tracking system](www.augmenta-tech.com) (persons and objects), [touchOSC](https://hexler.net/products/touchosc) (phone), or any XY coordinates (osc).
 Then it can be used to trigger midi notes or map any parameters in Ableton Live or MAX Msp.
 
-vidéo : https://www.youtube.com/watch?v=HbIoZnGIr1g
+vidéo : https://www.youtube.com/watch?v=HbIoZnGIr1g and https://www.youtube.com/watch?v=dVVZaYjTnSE
 
 ![maxforlive com](https://user-images.githubusercontent.com/5172593/120223115-5e8e9f00-c241-11eb-8550-13d5fa9590ac.gif)
 
