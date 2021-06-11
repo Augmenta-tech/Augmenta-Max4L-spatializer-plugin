@@ -11,11 +11,54 @@ boolean mode3D = false;
 
 float value;
 float x, y, r, g, b;
-float h1, h2, h3, h4, h5, exe, h6, h7, h8;
-float v1, v2, v3, v4, v5, v6, v7, v8;
-float exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8;
-float alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8;
-int active1, active2, active3, active4, active5, active6, active7, active8;
+//float h1, h2, h3, h4, h5, exe, h6, h7, h8;
+//float v1, v2, v3, v4, v5, v6, v7, v8;
+//float exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8;
+//float alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8;
+//int active1, active2, active3, active4, active5, active6, active7, active8;
+
+public static class Node {
+  float h = 1.0, v = 1.0, exp = 1.0;
+  boolean isActive = false;
+}
+
+public static class Knob {
+  float alpha = 1.0;
+}
+
+//Node node1, node2, node3, node4, node5, node6, node7, node8;
+//Knob knob1, knob2, knob3, knob4, knob5, knob6, knob7, knob8;
+
+Node node1 = new Node();
+Node node2 = new Node();
+Node node3 = new Node();
+Node node4 = new Node();
+Node node5 = new Node();
+Node node6 = new Node();
+Node node7 = new Node();
+Node node8 = new Node();
+  
+Knob knob1 = new Knob();
+Knob knob2 = new Knob();
+Knob knob3 = new Knob();
+Knob knob4 = new Knob();
+Knob knob5 = new Knob();
+Knob knob6 = new Knob();
+Knob knob7 = new Knob();
+Knob knob8 = new Knob();
+
+Node[] nodes = {node1, node2, node3, node4, node5, node6, node7, node8};
+Knob[] knobs = {knob1, knob2, knob3, knob4, knob5, knob6, knob7, knob8};
+color[] palette = {
+  color(0.384*255, 0.996*255, 0.384*255),
+  color(0.998*255, 0, 0),
+  color(0.427*255, 0.843*255, 255),
+  color(0.439*255, 0.624*255, 0.075*255),
+  color(0.969*255, 0.686*255, 0.184*255),
+  color(0.733*255, 0.035*255, 0.788*255),
+  color(0.882*255, 0.243*255, 0.149*255),
+  color(0.027*255, 0.451*255, 0.506*255)
+};
 
 int[] g_sceneSize = {400, 400};
 
@@ -38,7 +81,7 @@ void setup() {
   }
   setupGUI();
   // enable the resizable window
-  surface.setResizable(true);
+  surface.setResizable(true);  
 }
 
 void draw() {
@@ -89,74 +132,85 @@ void drawSpatializerDisks(PGraphics _mycanvas) {
   //_mycanvas.fill(r*255, g*255, b*255, a*320);  //   with color
   _mycanvas.fill(255); // white point
   _mycanvas.ellipse(x*w, y*h, 50, 50);
-
-  //node 1
-  if (active1 == 1)
-  {
-
-    _mycanvas.fill(0.384*255, 0.996*255, 0.384*255, alpha1*320);  //   Set fill to gray
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v1*w, h1*h, exp1*2*w, exp1*2*h);
+  
+  for(int i = 0; i < nodes.length; i++){
+//    System.out.println("Drawing elipse: " + i);
+    if(nodes[i].isActive){
+      _mycanvas.fill(palette[i],knobs[i].alpha * 255);
+      _mycanvas.noStroke();
+      _mycanvas.ellipse(nodes[i].v*w, nodes[i].h*h,nodes[i].exp*2*w, nodes[i].exp*2*h);
+    }
   }
+  
+    //node 1
+//   if (active1 == 1)
+//   {
 
-  // node 2
-  if (active2 == 1)
-  {
-    _mycanvas.fill(0.998*255, 0, 0, alpha2*320);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v2*w, h2*h, exp2*2*w, exp2*2*h);
-  }
+//     _mycanvas.fill(0.384*255, 0.996*255, 0.384*255, alpha1*320);  //   Set fill to gray
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v1*w, h1*h, exp1*2*w, exp1*2*h);
+//   }
 
-  // node 3
-  if (active3 == 1)
-  {
-    _mycanvas.fill(0.427*255, 0.843*255, 255, alpha3*320);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v3*w, h3*h, exp3*2*w, exp3*2*h);
-  }
+//   // node 2
+//   if (active2 == 1)
+//   {
+//     _mycanvas.fill(0.998*255, 0, 0, alpha2*320);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v2*w, h2*h, exp2*2*w, exp2*2*h);
+//   }
 
-  // node 4
-  if (active4 == 1)
-  {
-    _mycanvas.fill(0.439*255, 0.624*255, 0.075*255, alpha4*320);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v4*w, h4*h, exp4*2*w, exp4*2*h);
-  }
+//   // node 3
+//   if (active3 == 1)
+//   {
+//     _mycanvas.fill(0.427*255, 0.843*255, 255, alpha3*320);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v3*w, h3*h, exp3*2*w, exp3*2*h);
+//   }
 
-  // node 5
-  if (active5 == 1)
-  {
-    _mycanvas.fill(0.969*255, 0.686*255, 0.184*255, alpha5*255);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v5*w, h5*h, exp5*2*w, exp5*2*h);
-  }
+//   // node 4
+//   if (active4 == 1)
+//   {
+//     _mycanvas.fill(0.439*255, 0.624*255, 0.075*255, alpha4*320);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v4*w, h4*h, exp4*2*w, exp4*2*h);
+//   }
 
-  // node 6
-  if (active6 == 1)
-  {
-    _mycanvas.fill(0.733*255, 0.035*255, 0.788*255, alpha6*255);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v6*w, h6*h, exp6*2*w, exp6*2*h);
-  }
+//   // node 5
+//   if (active5 == 1)
+//   {
+//     _mycanvas.fill(0.969*255, 0.686*255, 0.184*255, alpha5*255);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v5*w, h5*h, exp5*2*w, exp5*2*h);
+//   }
 
-  // node 7
-  if (active7 == 1)
-  {
-    _mycanvas.fill(0.882*255, 0.243*255, 0.149*255, alpha7*255);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v7*w, h7*h, exp7*2*w, exp7*2*h);
-  }
+//   // node 6
+//   if (active6 == 1)
+//   {
+//     _mycanvas.fill(0.733*255, 0.035*255, 0.788*255, alpha6*255);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v6*w, h6*h, exp6*2*w, exp6*2*h);
+//   }
 
-  // node 8
-  if (active8 == 1)
-  {
-    _mycanvas.fill(0.027*255, 0.451*255, 0.506*255, alpha8*255);
-    _mycanvas.noStroke();
-    _mycanvas.ellipse(v8*w, h8*h, exp8*2*w, exp8*2*h);
-  }
+//   // node 7
+//   if (active7 == 1)
+//   {
+//     _mycanvas.fill(0.882*255, 0.243*255, 0.149*255, alpha7*255);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v7*w, h7*h, exp7*2*w, exp7*2*h);
+//   }
+
+//   // node 8
+//   if (active8 == 1)
+//   {
+//     _mycanvas.fill(0.027*255, 0.451*255, 0.506*255, alpha8*255);
+//     _mycanvas.noStroke();
+//     _mycanvas.ellipse(v8*w, h8*h, exp8*2*w, exp8*2*h);
+//   }
 }
 
 void oscEvent(OscMessage theOscMessage) {
+  
+  //println("Got message");
 
   if (theOscMessage.checkAddrPattern("/fusion")==true) {
     if (theOscMessage.checkTypetag("ffffii")) {
@@ -190,113 +244,107 @@ void oscEvent(OscMessage theOscMessage) {
   {
     if (theOscMessage.checkTypetag("fffi"))
     {
-      v1 = theOscMessage.get(0).floatValue();
-      h1 = theOscMessage.get(1).floatValue();
-      exp1 = theOscMessage.get(2).floatValue();
-      active1 = theOscMessage.get(3).intValue();
+      node1.v = theOscMessage.get(0).floatValue();
+      node1.h = theOscMessage.get(1).floatValue();
+      node1.exp = theOscMessage.get(2).floatValue();
+      node1.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob1")==true)
   {
     if (theOscMessage.checkTypetag("f"))
     {
-      alpha1 = theOscMessage.get(0).floatValue();
+      knob1.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 2
-
   if (theOscMessage.checkAddrPattern("/m4l/node2")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v2 = theOscMessage.get(0).floatValue(); 
-      h2 = theOscMessage.get(1).floatValue();
-      exp2 = theOscMessage.get(2).floatValue();
-      active2 = theOscMessage.get(3).intValue();
+      node2.v = theOscMessage.get(0).floatValue(); 
+      node2.h = theOscMessage.get(1).floatValue();
+      node2.exp = theOscMessage.get(2).floatValue();
+      node2.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob2")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha2 = theOscMessage.get(0).floatValue();
+      knob2.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 3
-
   if (theOscMessage.checkAddrPattern("/m4l/node3")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v3 = theOscMessage.get(0).floatValue(); 
-      h3 = theOscMessage.get(1).floatValue();
-      exp3 = theOscMessage.get(2).floatValue();
-      active3 = theOscMessage.get(3).intValue();
+      node3.v = theOscMessage.get(0).floatValue(); 
+      node3.h = theOscMessage.get(1).floatValue();
+      node3.exp = theOscMessage.get(2).floatValue();
+      node3.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob3")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha3 = theOscMessage.get(0).floatValue();
+      knob3.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 4
-
   if (theOscMessage.checkAddrPattern("/m4l/node4")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v4 = theOscMessage.get(0).floatValue(); 
-      h4 = theOscMessage.get(1).floatValue();
-      exp4 = theOscMessage.get(2).floatValue();
-      active4 = theOscMessage.get(3).intValue();
+      node4.v = theOscMessage.get(0).floatValue(); 
+      node4.h = theOscMessage.get(1).floatValue();
+      node4.exp = theOscMessage.get(2).floatValue();
+      node4.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob4")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha4 = theOscMessage.get(0).floatValue();
+      knob4.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 5
-
   if (theOscMessage.checkAddrPattern("/m4l/node5")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v5 = theOscMessage.get(0).floatValue(); 
-      h5 = theOscMessage.get(1).floatValue();
-      exp5 = theOscMessage.get(2).floatValue();
-      active5 = theOscMessage.get(3).intValue();
+      node5.v = theOscMessage.get(0).floatValue(); 
+      node5.h = theOscMessage.get(1).floatValue();
+      node5.exp = theOscMessage.get(2).floatValue();
+      node5.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob5")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha5 = theOscMessage.get(0).floatValue();
+      knob5.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 6
-
   if (theOscMessage.checkAddrPattern("/m4l/node6")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v6 = theOscMessage.get(0).floatValue(); 
-      h6 = theOscMessage.get(1).floatValue();
-      exp6 = theOscMessage.get(2).floatValue();
-      active6 = theOscMessage.get(3).intValue();
+      node6.v = theOscMessage.get(0).floatValue(); 
+      node6.h = theOscMessage.get(1).floatValue();
+      node6.exp = theOscMessage.get(2).floatValue();
+      node6.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob6")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha6 = theOscMessage.get(0).floatValue();
+      knob6.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
   //node 7
-
   if (theOscMessage.checkAddrPattern("/m4l/node7")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v7 = theOscMessage.get(0).floatValue(); 
-      h7 = theOscMessage.get(1).floatValue();
-      exp7 = theOscMessage.get(2).floatValue();
-      active7 = theOscMessage.get(3).intValue();
+      node7.v = theOscMessage.get(0).floatValue(); 
+      node7.h = theOscMessage.get(1).floatValue();
+      node7.exp = theOscMessage.get(2).floatValue();
+      node7.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob7")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha7 = theOscMessage.get(0).floatValue();
+      knob7.alpha = theOscMessage.get(0).floatValue();
     }
   }
 
@@ -304,15 +352,15 @@ void oscEvent(OscMessage theOscMessage) {
 
   if (theOscMessage.checkAddrPattern("/m4l/node8")==true) {
     if (theOscMessage.checkTypetag("fffi")) {
-      v8 = theOscMessage.get(0).floatValue(); 
-      h8 = theOscMessage.get(1).floatValue();
-      exp8 = theOscMessage.get(2).floatValue();
-      active8 = theOscMessage.get(3).intValue();
+      node8.v = theOscMessage.get(0).floatValue(); 
+      node8.h = theOscMessage.get(1).floatValue();
+      node8.exp = theOscMessage.get(2).floatValue();
+      node8.isActive = theOscMessage.get(3).intValue() == 1;
     }
   }
   if (theOscMessage.checkAddrPattern("/m4l/knob8")==true) {
     if (theOscMessage.checkTypetag("f")) {
-      alpha8 = theOscMessage.get(0).floatValue();
+      knob8.alpha = theOscMessage.get(0).floatValue();
     }
   }
 }
