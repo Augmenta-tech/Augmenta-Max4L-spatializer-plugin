@@ -8,14 +8,8 @@ OscP5 myosc;
 
 boolean mode3D = false;
 
-
 float value;
 float x, y, r, g, b;
-//float h1, h2, h3, h4, h5, exe, h6, h7, h8;
-//float v1, v2, v3, v4, v5, v6, v7, v8;
-//float exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8;
-//float alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8;
-//int active1, active2, active3, active4, active5, active6, active7, active8;
 
 public static class Node {
   float h = 1.0, v = 1.0, exp = 1.0;
@@ -60,6 +54,8 @@ color[] palette = {
   color(0.027*255, 0.451*255, 0.506*255)
 };
 
+color pointColor;
+
 int[] g_sceneSize = {400, 400};
 
 PGraphics canvasSquare; // Syphon/Spout texture output
@@ -81,7 +77,9 @@ void setup() {
   }
   setupGUI();
   // enable the resizable window
-  surface.setResizable(true);  
+  surface.setResizable(true); 
+  
+  pointColor = color(255,255,255,255);
 }
 
 void draw() {
@@ -128,11 +126,8 @@ void drawSpatializerDisks(PGraphics _mycanvas) {
   //rect(0,height/2,value*width,20);
   _mycanvas.ellipseMode(CENTER);  // Set ellipseMode to CENTER
 
-  // Draw point
-  //_mycanvas.fill(r*255, g*255, b*255, a*320);  //   with color
-  _mycanvas.fill(255); // white point
-  _mycanvas.ellipse(x*w, y*h, 50, 50);
-  
+ 
+  // Draw the nodes 
   for(int i = 0; i < nodes.length; i++){
 //    System.out.println("Drawing elipse: " + i);
     if(nodes[i].isActive){
@@ -142,70 +137,10 @@ void drawSpatializerDisks(PGraphics _mycanvas) {
     }
   }
   
-    //node 1
-//   if (active1 == 1)
-//   {
-
-//     _mycanvas.fill(0.384*255, 0.996*255, 0.384*255, alpha1*320);  //   Set fill to gray
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v1*w, h1*h, exp1*2*w, exp1*2*h);
-//   }
-
-//   // node 2
-//   if (active2 == 1)
-//   {
-//     _mycanvas.fill(0.998*255, 0, 0, alpha2*320);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v2*w, h2*h, exp2*2*w, exp2*2*h);
-//   }
-
-//   // node 3
-//   if (active3 == 1)
-//   {
-//     _mycanvas.fill(0.427*255, 0.843*255, 255, alpha3*320);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v3*w, h3*h, exp3*2*w, exp3*2*h);
-//   }
-
-//   // node 4
-//   if (active4 == 1)
-//   {
-//     _mycanvas.fill(0.439*255, 0.624*255, 0.075*255, alpha4*320);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v4*w, h4*h, exp4*2*w, exp4*2*h);
-//   }
-
-//   // node 5
-//   if (active5 == 1)
-//   {
-//     _mycanvas.fill(0.969*255, 0.686*255, 0.184*255, alpha5*255);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v5*w, h5*h, exp5*2*w, exp5*2*h);
-//   }
-
-//   // node 6
-//   if (active6 == 1)
-//   {
-//     _mycanvas.fill(0.733*255, 0.035*255, 0.788*255, alpha6*255);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v6*w, h6*h, exp6*2*w, exp6*2*h);
-//   }
-
-//   // node 7
-//   if (active7 == 1)
-//   {
-//     _mycanvas.fill(0.882*255, 0.243*255, 0.149*255, alpha7*255);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v7*w, h7*h, exp7*2*w, exp7*2*h);
-//   }
-
-//   // node 8
-//   if (active8 == 1)
-//   {
-//     _mycanvas.fill(0.027*255, 0.451*255, 0.506*255, alpha8*255);
-//     _mycanvas.noStroke();
-//     _mycanvas.ellipse(v8*w, h8*h, exp8*2*w, exp8*2*h);
-//   }
+  // Draw point
+  //_mycanvas.fill(r*255, g*255, b*255, a*320);  //   with color
+  _mycanvas.fill(pointColor); // white point
+  _mycanvas.ellipse(x*w, y*h, 50, 50);
 }
 
 void oscEvent(OscMessage theOscMessage) {
@@ -234,10 +169,17 @@ void oscEvent(OscMessage theOscMessage) {
     if (theOscMessage.checkTypetag("ff")) {
       x = theOscMessage.get(0).floatValue();
       y = theOscMessage.get(1).floatValue();
-      println("xy : "+x + y);
+      //println("xy : "+x + y);
     }
   }
   
+  // point color
+  if (theOscMessage.checkAddrPattern("/knobcolor")==true) {
+    if (theOscMessage.checkTypetag("ffff")) {
+      color tmp = color(theOscMessage.get(0).floatValue() * 255, theOscMessage.get(1).floatValue() * 255, theOscMessage.get(2).floatValue() * 255, theOscMessage.get(3).floatValue() * 255);
+      pointColor = tmp;
+    }
+  }  
 
   //node 1
   if (theOscMessage.checkAddrPattern("/m4l/node1")==true)
