@@ -42,4 +42,4 @@ The processing code here draws the disks and point to reproduce the interface fr
 
 ## Credits
 
-Designed & developped by [Romain Constant](www.romainconstant.com) & [THEORIZ](www.theoriz.com)
+Designed & developped by [Romain Constant](http://www.romainconstant.com) & [THEORIZ](https://www.theoriz.com)
